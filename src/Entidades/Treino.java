@@ -65,4 +65,20 @@ public class Treino {
         }
         return null;
     }
+    public void editarExercicio(String nomeBusca, String novoNome, int novasSeries, int novasRepeticoes, String novasObservacoes) {
+
+        Exercico exercicioEncontrado = buscarExercicio(nomeBusca);
+
+        if(exercicioEncontrado != null) {
+            exercicioEncontrado.setNome(novoNome);
+            exercicioEncontrado.setSeries(novasSeries);
+            exercicioEncontrado.setRepeticoes(novasRepeticoes);
+            exercicioEncontrado.setObservacoes(novasObservacoes);
+
+            System.out.println("Exercício editado com sucesso!");
+        } else {
+            System.out.println("Exercício não encontrado.");
+        }
+
+    }
 }

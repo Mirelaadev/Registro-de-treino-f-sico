@@ -42,7 +42,8 @@ public class Main {
             System.out.println("1 - Adicionar exercício");
             System.out.println("2 - Listar exercícios");
             System.out.println("3 - Buscar exercício");
-            System.out.println("4 - Remover exercício");
+            System.out.println("4 - Atualizar exercício");
+            System.out.println("5 - Remover exercício");
             System.out.println("0 - Sair");
             System.out.println("-------------------------------");
 
@@ -89,8 +90,34 @@ public class Main {
                     System.out.println("Exercício não encontrado.");
                 }
             }
+            else if(opcao == 4){
 
-            else if(opcao == 4) {
+                System.out.println("Digite o nome do exercício que deseja editar:");
+                String nomeBusca = sc.nextLine();
+
+                System.out.println("Novo nome do exercício:");
+                String novoNome = sc.nextLine();
+
+                System.out.println("Nova quantidade de séries:");
+                int novasSeries = Integer.parseInt(sc.nextLine());
+
+                System.out.println("Nova quantidade de repetições:");
+                int novasRepeticoes = Integer.parseInt(sc.nextLine());
+
+                System.out.println("Novas observações:");
+                String novasObservacoes = sc.nextLine();
+
+                treino.editarExercicio(
+                        nomeBusca,
+                        novoNome,
+                        novasSeries,
+                        novasRepeticoes,
+                        novasObservacoes
+                );
+
+            }
+
+            else if(opcao == 5) {
                 System.out.println("Digite o nome do exercício que deseja remover:");
                 String nomeBusca = sc.nextLine();
 

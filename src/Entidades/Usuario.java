@@ -4,7 +4,6 @@ import Interfaces.OperacoesTreino;
 public class Usuario extends Pessoa implements OperacoesTreino {
 
     private String email;
-    private String senha;
     private Treino[] treinos;
 
     public Usuario(String nome, int idade, String email) {
@@ -37,12 +36,12 @@ public class Usuario extends Pessoa implements OperacoesTreino {
 
     @Override
     public void inicarTreino() {
-        System.out.println("Entidades.Treino inicado");
+        System.out.println("Treino inicado");
     }
 
     @Override
     public void finalizarTreino() {
-        System.out.println("Entidades.Treino finalizado");
+        System.out.println("Treino finalizado");
     }
 
     @Override
