@@ -4,15 +4,10 @@ import Interfaces.OperacoesTreino;
 public class Usuario extends Pessoa implements OperacoesTreino {
 
     private String email;
-    private Treino[] treinos;
 
     public Usuario(String nome, int idade, String email) {
         super(nome, idade);
         this.email = email;
-    }
-
-    public Treino[] getTreino() {
-        return treinos;
     }
 
     public String getEmail() {
@@ -23,15 +18,11 @@ public class Usuario extends Pessoa implements OperacoesTreino {
         this.email = email;
     }
 
-    public void setTreino(Treino[] treino) {
-        this.treinos = treino;
-    }
-
     @Override
-    public void exibirDados(){
+    public void exibirDados() {
         System.out.println("Nome: " + getNome());
         System.out.println("Idade: " + getIdade());
-        System.out.println("Email: "+ getEmail());
+        System.out.println("Email: " + getEmail());
     }
 
     @Override
@@ -42,12 +33,5 @@ public class Usuario extends Pessoa implements OperacoesTreino {
     @Override
     public void finalizarTreino() {
         System.out.println("Treino finalizado");
-    }
-
-    @Override
-    public void listarTreino() {
-        for(Treino treino : treinos){
-            treino.listarExercicios();
-        }
     }
 }

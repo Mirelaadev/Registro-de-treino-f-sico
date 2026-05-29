@@ -48,17 +48,10 @@ public class Exercico {
         this.observacoes = observacoes;
     }
 
-    public void exibirExercicio(){
+    public void exibirExercicio() {
         System.out.println("Nome do exercício: " + getNome());
         System.out.println("Quantidade de séries: " + getSeries());
         System.out.println("Quantidade de repetições: " + getRepeticoes());
         System.out.println("Observações: " + getObservacoes());
-    }
-
-    public void editarExercicio(String novoNome, int novasSeries, int novasRepeticoes, String novasObservacoes){
-        this.nome = novoNome;
-        this.series = novasSeries;
-        this.repeticoes = novasRepeticoes;
-        this.observacoes = novasObservacoes;
     }
 }

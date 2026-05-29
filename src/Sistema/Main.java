@@ -116,7 +116,6 @@ public class Main {
                 );
 
             }
-
             else if(opcao == 5) {
                 System.out.println("Digite o nome do exercício que deseja remover:");
                 String nomeBusca = sc.nextLine();
