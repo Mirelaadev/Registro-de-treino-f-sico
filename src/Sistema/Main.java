@@ -2,9 +2,15 @@ package Sistema;
 import Entidades.Exercico;
 import Entidades.Treino;
 import Entidades.Usuario;
+import Banco.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
+
+    private static PreparedStatement ps;
 
     public static void main(String[] args) {
 
@@ -34,6 +40,26 @@ public class Main {
         System.out.println("Digite a data do treino:");
         String dataTreino = sc.nextLine();
         treino.setDataTreino(dataTreino);
+
+        try {
+            String SQL = "INSERT INTO usuario(nome, idade, email, nome_treino, data_treino) values (?, ?, ?, ?,?)";
+
+            ps = new Conexao().getCon().prepareStatement(SQL);
+
+            ps.setString(1, usuario.getNome());
+            ps.setInt(2, usuario.getIdade());
+            ps.setString(3, usuario.getEmail());
+            ps.setString(4, treino.getNomeTreino());
+            ps.setString(5, treino.getDataTreino());
+
+
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Dados salvos com sucesso");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         int opcao;
 
@@ -66,9 +92,31 @@ public class Main {
 
                 treino.addExercicio(exercicio);
 
-                System.out.println("Exercício adicionado com sucesso!");
 
+                try {
+
+                    String SQL = "INSERT INTO exercicio(nome, series, repeticoes, observacoes) VALUES (?, ?, ?, ?)";
+
+                    Connection con = new Conexao().getCon();
+
+                    PreparedStatement ps = con.prepareStatement(SQL);
+
+                    ps.setString(1, exercicio.getNome());
+                    ps.setInt(2, exercicio.getSeries());
+                    ps.setInt(3, exercicio.getRepeticoes());
+                    ps.setString(4, exercicio.getObservacoes());
+
+                    ps.executeUpdate();
+
+                    ps.close();
+
+                    System.out.println("Exercício salvo no banco!");
+
+                } catch(SQLException e) {
+                    e.printStackTrace();
+                }
             }
+
 
             else if(opcao == 2) {
                 System.out.println("\nLISTA DE EXERCÍCIOS");
