@@ -169,20 +169,25 @@ public class Main {
 
             }
             else if(opcao == 4) {
-                System.out.println("Digite o nome do exercício que deseja remover:");
-                String nomeBusca = sc.nextLine();
 
-                Exercico exercicioEncontrado = treino.buscarExercicio(nomeBusca);
+                System.out.println("Digite o ID do exercício que deseja remover:");
+                int id = Integer.parseInt(sc.nextLine());
 
-                if(exercicioEncontrado != null) {
-                    treino.removerExercicio(exercicioEncontrado);
+                try {
+                    String SQL = "DELETE FROM exercicio WHERE id = ?";
+
+                    ps = new Conexao().getCon().prepareStatement(SQL);
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+
+                    ps.close();
+
                     System.out.println("Exercício removido com sucesso!");
 
-                } else {
-                    System.out.println("Exercício não encontrado.");
+                } catch(SQLException e) {
+                    e.printStackTrace();
                 }
             }
-
         } while(opcao != 0);
         System.out.println("Sistema encerrado.");
         sc.close();
