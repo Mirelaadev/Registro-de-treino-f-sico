@@ -144,8 +144,8 @@ public class Main {
 
             else if(opcao == 3){
 
-                System.out.println("Digite o nome do exercício que deseja editar:");
-                String nomeBusca = sc.nextLine();
+                System.out.println("Digite o ID do exercício que deseja editar:");
+                int id = Integer.parseInt(sc.nextLine());
 
                 System.out.println("Novo nome do exercício:");
                 String novoNome = sc.nextLine();
@@ -159,14 +159,27 @@ public class Main {
                 System.out.println("Novas observações:");
                 String novasObservacoes = sc.nextLine();
 
-                treino.editarExercicio(
-                        nomeBusca,
-                        novoNome,
-                        novasSeries,
-                        novasRepeticoes,
-                        novasObservacoes
-                );
+                try {
 
+                    String SQL = "UPDATE exercicio SET nome=?, series=?, repeticoes=?, observacoes=? WHERE id=?";
+
+                    ps = new Conexao().getCon().prepareStatement(SQL);
+
+                    ps.setString(1, novoNome);
+                    ps.setInt(2, novasSeries);
+                    ps.setInt(3, novasRepeticoes);
+                    ps.setString(4, novasObservacoes);
+                    ps.setInt(5, id);
+
+                    ps.executeUpdate();
+
+                    ps.close();
+
+                    System.out.println("Exercício atualizado com sucesso!");
+
+                } catch(SQLException e) {
+                    e.printStackTrace();
+                }
             }
             else if(opcao == 4) {
 
