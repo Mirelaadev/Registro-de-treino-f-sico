@@ -5,12 +5,14 @@ import Entidades.Usuario;
 import Banco.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
 
     private static PreparedStatement ps;
+    private static ResultSet rs;
 
     public static void main(String[] args) {
 
@@ -94,7 +96,6 @@ public class Main {
 
 
                 try {
-
                     String SQL = "INSERT INTO exercicio(nome, series, repeticoes, observacoes) VALUES (?, ?, ?, ?)";
 
                     Connection con = new Conexao().getCon();
@@ -120,11 +121,29 @@ public class Main {
 
             else if(opcao == 2) {
                 System.out.println("\nLISTA DE EXERCÍCIOS");
-                treino.listarExercicios();
+                //treino.listarExercicios();
+
+                try {
+                    String SQL = "SELECT * FROM exercicio";
+
+                    rs = new Conexao().getCon().createStatement().executeQuery(SQL);
+
+                    while(rs.next()){
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nome: " + rs.getString("nome"));
+                        System.out.println("Séries: " + rs.getInt("series"));
+                        System.out.println("Repetições: " + rs.getInt("repeticoes"));
+                        System.out.println("Observações: " + rs.getString("observacoes"));
+                        System.out.println("-------------------");
+
+                    }
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
             else if(opcao == 3) {
-
                 System.out.println("Digite o nome do exercício:");
                 String nomeBusca = sc.nextLine();
 
