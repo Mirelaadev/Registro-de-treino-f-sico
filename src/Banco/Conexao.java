@@ -9,8 +9,10 @@ public class Conexao {
 
     public Conexao(){
         try {
+            //Registro do Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
+            //Criação da conexão
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/registro_de_treino", "root", "root");
 
             System.out.println("Conexão efetuada com sucesso!");

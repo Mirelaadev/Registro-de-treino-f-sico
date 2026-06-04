@@ -3,6 +3,7 @@ import Entidades.Exercico;
 import Entidades.Treino;
 import Entidades.Usuario;
 import Banco.Conexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,15 +34,13 @@ public class Main {
 
         Usuario usuario = new Usuario(nome, idade, email);
 
-        Treino treino = new Treino();
-
         System.out.println("Digite o nome do treino:");
         String nomeTreino = sc.nextLine();
-        treino.setNomeTreino(nomeTreino);
 
         System.out.println("Digite a data do treino:");
         String dataTreino = sc.nextLine();
-        treino.setDataTreino(dataTreino);
+
+        Treino treino = new Treino(nomeTreino, dataTreino);
 
         try {
             String SQL = "INSERT INTO usuario(nome, idade, email, nome_treino, data_treino) values (?, ?, ?, ?,?)";
@@ -54,9 +53,9 @@ public class Main {
             ps.setString(4, treino.getNomeTreino());
             ps.setString(5, treino.getDataTreino());
 
-
             ps.executeUpdate();
             ps.close();
+
             System.out.println("Dados salvos com sucesso");
 
         } catch (SQLException e) {
@@ -91,15 +90,10 @@ public class Main {
 
                 Exercico exercicio = new Exercico(nomeExercicio, series, repeticoes, observacoes);
 
-                treino.addExercicio(exercicio);
-
-
                 try {
                     String SQL = "INSERT INTO exercicio(nome, series, repeticoes, observacoes) VALUES (?, ?, ?, ?)";
 
-                    Connection con = new Conexao().getCon();
-
-                    PreparedStatement ps = con.prepareStatement(SQL);
+                    ps = new Conexao().getCon().prepareStatement(SQL);
 
                     ps.setString(1, exercicio.getNome());
                     ps.setInt(2, exercicio.getSeries());
@@ -120,7 +114,6 @@ public class Main {
 
             else if(opcao == 2) {
                 System.out.println("\nLISTA DE EXERCÍCIOS");
-                //treino.listarExercicios();
 
                 try {
                     String SQL = "SELECT * FROM exercicio";
@@ -160,7 +153,6 @@ public class Main {
                 String novasObservacoes = sc.nextLine();
 
                 try {
-
                     String SQL = "UPDATE exercicio SET nome=?, series=?, repeticoes=?, observacoes=? WHERE id=?";
 
                     ps = new Conexao().getCon().prepareStatement(SQL);

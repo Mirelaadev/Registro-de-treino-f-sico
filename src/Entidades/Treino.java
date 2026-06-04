@@ -7,7 +7,9 @@ public class Treino {
     private String dataTreino;
     private ArrayList<Exercico> exercicios;
 
-    public Treino() {
+    public Treino(String nomeTreino, String dataTreino) {
+        this.nomeTreino = nomeTreino;
+        this.dataTreino = dataTreino;
         exercicios = new ArrayList<>();
     }
 
