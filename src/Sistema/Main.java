@@ -69,9 +69,8 @@ public class Main {
             System.out.println("\n-------------------------------");
             System.out.println("1 - Adicionar exercício");
             System.out.println("2 - Listar exercícios");
-            System.out.println("3 - Buscar exercício");
-            System.out.println("4 - Atualizar exercício");
-            System.out.println("5 - Remover exercício");
+            System.out.println("3 - Atualizar exercício");
+            System.out.println("4 - Remover exercício");
             System.out.println("0 - Sair");
             System.out.println("-------------------------------");
 
@@ -143,21 +142,7 @@ public class Main {
                 }
             }
 
-            else if(opcao == 3) {
-                System.out.println("Digite o nome do exercício:");
-                String nomeBusca = sc.nextLine();
-
-                Exercico exercicioEncontrado = treino.buscarExercicio(nomeBusca);
-
-                if(exercicioEncontrado != null) {
-                    System.out.println("Exercício encontrado:");
-                    exercicioEncontrado.exibirExercicio();
-
-                } else {
-                    System.out.println("Exercício não encontrado.");
-                }
-            }
-            else if(opcao == 4){
+            else if(opcao == 3){
 
                 System.out.println("Digite o nome do exercício que deseja editar:");
                 String nomeBusca = sc.nextLine();
@@ -183,7 +168,7 @@ public class Main {
                 );
 
             }
-            else if(opcao == 5) {
+            else if(opcao == 4) {
                 System.out.println("Digite o nome do exercício que deseja remover:");
                 String nomeBusca = sc.nextLine();
 
@@ -196,10 +181,6 @@ public class Main {
                 } else {
                     System.out.println("Exercício não encontrado.");
                 }
-            }
-
-            else if(opcao != 0) {
-                System.out.println("Opção inválida.");
             }
 
         } while(opcao != 0);
